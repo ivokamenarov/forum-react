@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import '../test.css'
-import Api from '../services/Api';
+import Api from '../services/Api'
 
 class TopicForm extends Component {
   constructor (props) {

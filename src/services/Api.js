@@ -2,9 +2,9 @@
 class Api {
   constructor () {
     this.topicList = [
-      {topicId: 1, title: 'Ivan'},
-      {topicId: 2, title: 'Java EE'},
-      {topicId: 3, title: 'Programing'}
+      {id: 1, title: 'Ivan'},
+      {id: 2, title: 'Java EE'},
+      {id: 3, title: 'Programing'}
     ]
     this.fetchTopics = this.fetchTopics.bind(this)
   }
@@ -20,9 +20,9 @@ class Api {
   async postTopic ({title}) {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        let topicId = this.topicList.length + 1
+        let id = this.topicList.length + 1
         let topic = {
-          topicId,
+          id,
           title
         }
         this.topicList.push(topic)

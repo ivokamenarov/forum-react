@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import TopicForm from './TopicForm'
 import Api from '../services/Api'
+import TopicItem from './TopicItem'
 
 class ListTopicsPage extends Component {
   constructor (props) {
@@ -31,16 +31,15 @@ class ListTopicsPage extends Component {
     let { listTopics } = this.state
     return (
       <div>
-        {(listTopics) ? <ul>
+        <h1>List of topics:</h1>
+        {(listTopics) ? <div>
           {listTopics.map((topic) => (
-            <li key={topic.topicId}>
-              {topic.topicId} : {topic.title}
-            </li>
+            <TopicItem key={topic.id} topic={topic} />
           ))
           }
-        </ul> : <div>Loading...</div>
+        </div> : <div>Loading...</div>
         }
-        <Link to='addtopic' >Add new Topic</Link>
+        <Link to='addtopic' className='btn btn-primary' >Add new Topic</Link>
       </div>
     )
   }
