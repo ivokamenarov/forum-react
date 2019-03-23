@@ -13,7 +13,7 @@ export default (WrappedComponent) => {
 
     componentDidMount () {
       this._isMounted = true
-      this.subscribe = this.props.request()
+      this.props.request
         .then(res => {
           if (this._isMounted) {
             this.setState({

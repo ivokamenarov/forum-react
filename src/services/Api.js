@@ -6,7 +6,6 @@ class Api {
       baseURL: process.env.REACT_APP_API_URL
     })
     this.instance.defaults.headers.post['Content-Type'] = 'application/json'
-    this.fetchTopics = this.fetchTopics.bind(this)
   }
 
   async fetchTopics () {

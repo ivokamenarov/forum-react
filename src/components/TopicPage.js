@@ -1,21 +1,16 @@
 import React, { Component } from 'react'
 import Api from '../services/Api'
+import TopicInfo from './TopicInfo'
 
 class TopicPage extends Component {
-  constructor (props) {
-    super(props)
-    this.state = {}
-  }
-
-  componentDidMount () {
-    Api.fetchTopicById(this.props.match.params.topicId)
-      .then((result) => {
-        console.log(result.data)
-      })
-  }
-
   render () {
-    return <h1>{this.props.match.params.topicId}</h1>
+    let {topicId} = this.props.match.params
+    return (
+      <div>
+        <TopicInfo request={Api.fetchTopicById(topicId)} />
+        {/* <TopicReplies request={Api.fetchRepliesByTopicId(topicId)} /> */}
+      </div>
+    )
   }
 }
 
