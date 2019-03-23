@@ -3,33 +3,28 @@ import axios from 'axios'
 class Api {
   constructor () {
     this.instance = axios.create({
-      baseURL: 'http://localhost:8090'
+      baseURL: process.env.REACT_APP_API_URL
     })
-
-    // this.topicList = [
-    //   {id: 1, title: 'Ivan'},
-    //   {id: 2, title: 'Java EE'},
-    //   {id: 3, title: 'Programing'}
-    // ]
+    this.instance.defaults.headers.post['Content-Type'] = 'application/json'
+    this.fetchTopics = this.fetchTopics.bind(this)
   }
 
   async fetchTopics () {
     let res = await this.instance.get('/topics/')
+    return new Promise((resolve, reject) => {
+      setTimeout(() => resolve(res), 2000)
+    })
+    // return res
+  }
+
+  async postTopic (topic) {
+    let res = await this.instance.post('/topics/', topic)
     return res
   }
 
-  async postTopic ({title}) {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        let id = this.topicList.length + 1
-        let topic = {
-          id,
-          title
-        }
-        this.topicList.push(topic)
-        resolve(topic)
-      }, 2000)
-    })
+  async fetchTopicById (topicId) {
+    let res = await this.instance.get(`/topics/id/${topicId}/`)
+    return res
   }
 }
 

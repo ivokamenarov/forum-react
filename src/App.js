@@ -12,13 +12,15 @@ export default class App extends Component {
     return (
       <div>
         <Navbar />
-        <Switch>
-          <Route path='/' exact component={Home} />
-          <Route path='/home' component={Home} />
-          <Route path='/topics' exact component={ListTopicsPage} />
-          <Route path='/topics/:topicId' component={TopicPage} />
-          <Route path='/addtopic' component={TopicForm} />
-        </Switch>
+        <div className='container'>
+          <Switch>
+            <Route path='/' exact component={Home} />
+            <Route path='/home' component={Home} />
+            <Route path='/topics' exact component={ListTopicsPage} />
+            <Route path='/topics/:topicId' component={TopicPage} />
+            <Route path='/addtopic' component={TopicForm} />
+          </Switch>
+        </div>
       </div>
     )
   }
