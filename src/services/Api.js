@@ -1,20 +1,21 @@
+import axios from 'axios'
 
 class Api {
   constructor () {
-    this.topicList = [
-      {id: 1, title: 'Ivan'},
-      {id: 2, title: 'Java EE'},
-      {id: 3, title: 'Programing'}
-    ]
-    this.fetchTopics = this.fetchTopics.bind(this)
+    this.instance = axios.create({
+      baseURL: 'http://localhost:8090'
+    })
+
+    // this.topicList = [
+    //   {id: 1, title: 'Ivan'},
+    //   {id: 2, title: 'Java EE'},
+    //   {id: 3, title: 'Programing'}
+    // ]
   }
 
   async fetchTopics () {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve(this.topicList)
-      }, 2000)
-    })
+    let res = await this.instance.get('/topics/')
+    return res
   }
 
   async postTopic ({title}) {

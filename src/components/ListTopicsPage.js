@@ -13,7 +13,11 @@ class ListTopicsPage extends Component {
 
   componentDidMount () {
     Api.fetchTopics()
-      .then((listTopics) => this.setState({listTopics}))
+      .then((results) => {
+        let listTopics = results.data
+        console.log(listTopics)
+        this.setState({listTopics})
+      })
   }
 
   topicFormSubmit (topic) {
@@ -33,9 +37,10 @@ class ListTopicsPage extends Component {
       <div>
         <h1>List of topics:</h1>
         {(listTopics) ? <div>
-          {listTopics.map((topic) => (
-            <TopicItem key={topic.id} topic={topic} />
-          ))
+          {
+            listTopics.map((topic) => (
+              <TopicItem key={topic.id} topic={topic} />
+            ))
           }
         </div> : <div>Loading...</div>
         }

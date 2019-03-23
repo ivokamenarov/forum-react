@@ -26,7 +26,8 @@ class TopicForm extends Component {
 
   handleOnChange (event) {
     let topic = this.state.topic
-    topic[event.target.name] = event.target.value
+    let {name, value} = event.target
+    topic[name] = value
     this.setState({topic})
   }
 
