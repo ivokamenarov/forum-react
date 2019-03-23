@@ -4,6 +4,7 @@ export default (WrappedComponent) => {
   return class extends Component {
     constructor (props) {
       super(props)
+      this._isMounted = false
       this.state = {
         data: [],
         ready: false
@@ -11,11 +12,19 @@ export default (WrappedComponent) => {
     }
 
     componentDidMount () {
-      this.props.request()
-        .then(res => this.setState({
-          data: res.data,
-          ready: true
-        }))
+      this._isMounted = true
+      this.subscribe = this.props.request()
+        .then(res => {
+          if (this._isMounted) {
+            this.setState({
+              data: res.data,
+              ready: true
+            })
+          }
+        })
+    }
+    componentWillUnmount () {
+      this._isMounted = false
     }
 
     render () {
