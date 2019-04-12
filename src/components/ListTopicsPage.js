@@ -6,7 +6,6 @@ import Topics from './AllTopics'
 class ListTopicsPage extends Component {
   constructor (props) {
     super(props)
-
     this.state = {}
   }
 
@@ -14,8 +13,8 @@ class ListTopicsPage extends Component {
     return (
       <div>
         <h1>List of topics:</h1>
-        <Topics request={Api.fetchTopics()} />
-        <Link to='addtopic' className='btn btn-primary' >Add new Topic</Link>
+        <Topics request={Api.setInterseptor(this.props).fetchTopics()} />
+        <Link to='topics/add' className='btn btn-primary' >Add new Topic</Link>
       </div>
     )
   }

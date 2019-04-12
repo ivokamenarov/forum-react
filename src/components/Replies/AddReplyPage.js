@@ -1,13 +1,11 @@
 import React, { Component } from 'react'
-import '../test.css'
-import Api from '../services/Api'
+import Api from '../../services/Api'
 
-class TopicForm extends Component {
+class AddReplyPage extends Component {
   constructor (props) {
     super(props)
 
     this.state = {
-      title: '',
       content: ''
     }
     this.handleOnChange = this.handleOnChange.bind(this)
@@ -16,8 +14,8 @@ class TopicForm extends Component {
   }
 
   validate () {
-    let { title } = this.state
-    if (title.length < 3) {
+    let { content } = this.state
+    if (content.length < 3) {
       this.setState({ error: 'Title must be more than 3 symbols!' })
       return false
     } else {
@@ -29,15 +27,17 @@ class TopicForm extends Component {
   handleOnSumbit (event) {
     event.preventDefault()
     if (this.validate()) {
-      const topic = {
-        title: this.state.title,
-        replyContent: this.state.content
+      let { topicId } = this.props.match.params
+      console.log(topicId)
+      const reply = {
+        replyContent: this.state.content,
+        topicId
       }
-      Api.setInterseptor(this.props).postTopic(topic)
+      reply.topicId = topicId
+      Api.setInterseptor(this.props).createReply(reply)
         .then(() => {
-          this.props.history.push('/topics')
+          this.props.history.push('/topics/' + topicId)
         })
-        .catch(error => console.log(error))
     }
   }
 
@@ -49,21 +49,10 @@ class TopicForm extends Component {
   render () {
     return (
       <div>
-        <h1>Topic Form</h1>
+        <h1>Reply Form</h1>
         <form onSubmit={this.handleOnSumbit}>
           <div className='form-group'>
-            <label htmlFor='title'>Title</label>
-            <input type='text'
-              className='form-control'
-              id='title'
-              name='title'
-              value={this.state.title}
-              onChange={this.handleOnChange} />
-            {this.state.error &&
-              <small id='errorTitle' className='form-text text-muted'>{this.state.error}</small>}
-          </div>
-          <div className='form-group'>
-            <label htmlFor='content'>Content</label>
+            <label htmlFor='content'>Title</label>
             <input type='text'
               className='form-control'
               id='content'
@@ -80,4 +69,4 @@ class TopicForm extends Component {
   }
 }
 
-export default TopicForm
+export default AddReplyPage

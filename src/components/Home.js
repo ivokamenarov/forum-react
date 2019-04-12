@@ -1,10 +1,10 @@
 import React from 'react'
+import Login from './Users/Login'
 
 const Home = function (props) {
   return (
     <div>
-      <h1>Hello</h1>
-      <h2> World {props.match.params.name} </h2>
+      <Login {...props} />
     </div>
   )
 }

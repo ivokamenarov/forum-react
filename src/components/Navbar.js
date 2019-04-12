@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import Auth from '../services/Auth'
 class Navbar extends Component {
   render () {
     return (
@@ -15,6 +16,9 @@ class Navbar extends Component {
             <li className='nav-item'>
               <Link className='nav-link' to='/topics'>Topic</Link>
             </li>
+            {Auth.isAuthenticate() && <li className='nav-item'>
+              <Link className='nav-link' to='/logout'>Logout</Link>
+            </li>}
           </ul>
         </div>
       </nav>
